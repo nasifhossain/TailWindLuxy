@@ -11,6 +11,7 @@ import RegisterUser from "./pages/register/Register";
 import ResetPassword from "./pages/reset-password/ResetPassword";
 import UpdatePassword from "./pages/updatepassword/UpdatePassword";
 import MyAccount from "./pages/myaccount/MyAccount";
+import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/reset-password/:id/:token" element={<ResetPassword />} />
         <Route path="/updatePassword/:username" element={<UpdatePassword/>} />
         <Route path="/myAccount/:username" element={<MyAccount/>}/>
+        <Route path="/*" element={<NotFound/>}/>
       </Routes>
     </Fragment>
   );
