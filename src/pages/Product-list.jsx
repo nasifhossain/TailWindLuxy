@@ -28,7 +28,8 @@ function ProductList() {
       .catch((err) => {
         setError(err.message);
         setData([]);
-      }).finally(()=>{
+      })
+      .finally(() => {
         setLoading(false);
       });
   }, []);
@@ -61,12 +62,12 @@ function ProductList() {
     );
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white to-blue-50 dark:from-gray-900 dark:to-gray-800 text-gray-800 dark:text-gray-100 flex flex-col">
+    <div className="min-h-screen bg-gradient-to-br from-white to-blue-50 text-gray-800 flex flex-col">
       <div className="flex-1 flex-col">
         <Navbar />
 
-        <div className="text-center mt-20 mb-4">
-          <h1 className="text-3xl md:text-4xl font-bold text-purple-700 dark:text-purple-300">
+        <div className="text-center mt-5  mb-4">
+          <h1 className="text-3xl md:text-4xl font-bold text-purple-700">
             Product List
           </h1>
         </div>
@@ -82,23 +83,29 @@ function ProductList() {
             data.products.map((item) => (
               <div
                 key={item.id}
-                className="bg-white dark:bg-gray-800 rounded-xl shadow-md px-4 pb-4 flex flex-col items-center justify-between hover:shadow-slate-500 transition-all duration-300"
+                className="bg-white rounded-xl shadow-md px-4 pb-4 flex flex-col items-center justify-between hover:shadow-slate-500 transition-all duration-300"
               >
-                <img
-                  onClick={() => navigate(`/product-details/${item.id}`)}
-                  src={item.thumbnail}
-                  alt={item.title}
-                  className=" h-45 object-cover rounded-md mb-3 cursor-pointer hover:scale-105 transition-transform duration-300"
-                />
-                <div className="text-lg font-medium text-center mb-1 w-full">
+                <div className="bg-slate-300 h-85 flex flex-col justify-center items-center">
+                  <img
+                    onClick={() => navigate(`/product-details/${item.id}`)}
+                    src={item.thumbnail}
+                    alt={item.title}
+                    className="h-48 sm:h-45 object-cover rounded-md mb-3 cursor-pointer hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <hr className="w-3/4 my-1 border-t border-gray-800" />
+
+
+
+                <div className="text-lg max-sm:text-sm max-sm:font-bold font-medium text-center mb-1 w-full truncate">
                   {item.title}
                 </div>
-                <div className="text-blue-600 dark:text-blue-300 font-semibold mb-3">
+                <div className="text-blue-600 font-semibold mb-3">
                   ${item.price}
                 </div>
                 <button
                   onClick={() => handleAddToCart(item)}
-                  className=" bg-blue-500 text-slate-100 hover:bg-yellow-500 font-bold px-4 py-2 rounded-3xl transition"
+                  className="bg-blue-500 text-slate-100 hover:bg-yellow-500 font-bold px-4 py-2 rounded-3xl transition"
                 >
                   Add To Cart
                 </button>
