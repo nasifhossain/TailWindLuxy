@@ -83,9 +83,9 @@ function ProductList() {
             data.products.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-xl shadow-md pb-4 flex flex-col w-full items-center justify-between hover:shadow-slate-500 transition-all duration-300 max-sm:h-[55vh]"
+                className="bg-white rounded-xl shadow-md pb-4 flex flex-col w-full items-center justify-between hover:shadow-slate-500 transition-all duration-300 max-sm:h-[47vh]"
               >
-                <div className="bg-slate-300 max-sm:h-[40vh] rounded-t-xl w-full  flex flex-col justify-center items-center">
+                <div className="bg-slate-300 max-sm:h-[35vh] rounded-t-xl w-full  flex flex-col justify-center items-center">
                   <img
                     onClick={() => navigate(`/product-details/${item.id}`)}
                     src={item.thumbnail}
