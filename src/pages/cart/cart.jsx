@@ -46,7 +46,6 @@ function Cart() {
       const newItems = indexItems.map((item) =>
         item.idx === id ? { ...item, quantity: item.quantity + 1 } : item
       );
-
       setIndexItems(newItems);
       localStorage.setItem("cart", JSON.stringify(newItems));
 
@@ -91,119 +90,123 @@ function Cart() {
   }
 
   return (
-    <div>
-        <Navbar/>
-      <div className="w-full mb-5  mx-auto bg-white text-gray-800 px-10 rounded-lg shadow-lg">
-        <header className="text-center border-b-2 border-gray-300 pb-4 mb-6">
-          <h2 className="text-3xl font-bold text-yellow-500 mt-10">
-            🛒 Your Shopping Cart
-          </h2>
-        </header>
+    <div className="min-h-screen bg-gray-50">
+      <Navbar />
+      <div className="w-full max-w-7xl mx-auto mt-10 px-4 sm:px-6 lg:px-8">
+        <div className="bg-white text-gray-800 p-6 rounded-lg shadow-lg">
+          <header className="text-center border-b pb-4 mb-6">
+            <h2 className="text-3xl font-bold text-yellow-500">
+              🛒 Your Shopping Cart
+            </h2>
+          </header>
 
-        {indexItems.length === 0 ? (
-          <div className="text-center">
-            <p className="text-gray-500">Your cart is empty.</p>
-            <button
-              className="mt-4 px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded"
-              onClick={() => navigate("/product-list")}
-            >
-              Continue Shopping
-            </button>
-          </div>
-        ) : (
-          <div className="flex flex-col md:flex-row gap-8">
-            <div className="flex-1 space-y-4 max-h-[500px] overflow-y-auto pr-2">
-              {indexItems.map((item) => (
-                <div
-                  key={item.idx}
-                  className="flex items-center gap-4 bg-gray-100 p-4 rounded border border-gray-300"
-                >
-                  <img
-                    onClick={() => navigate(`/product-details/${item.idx}`)}
-                    src={item.thumbnail}
-                    alt={item.title}
-                    className="w-20 h-20 object-cover rounded cursor-pointer"
-                  />
-                  <div className="flex-1">
-                    <strong className="text-lg  w-full text-gray-900 flex justify-center ">
-                      {item.title}
-                    </strong>
-                    <p className="text-sm flex justify-center text-gray-600">
-                      ${item.price.toFixed(2)}
-                    </p>
-                    <button
-                      onClick={() => deleteItem(item.idx)}
-                      className="mt-2 hover:cursor-pointer text-sm bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded w-full"
-                    >
-                      Remove
-                    </button>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <button
-                      onClick={() => decreaseQuantity(item.idx)}
-                      className="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded"
-                    >
-                      -
-                    </button>
-                    <p>{item.quantity}</p>
-                    <button
-                      onClick={() => increaseQuantity(item.idx)}
-                      className="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded"
-                    >
-                      +
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className=" lg:w-1/3 bg-gray-100 border border-gray-300 p-6 rounded space-y-4">
-              <h3 className="text-xl font-bold text-yellow-500 text-center">
-                Cart Summary
-              </h3>
-
-              {indexItems.map((item) => (
-                <div
-                  key={item.idx}
-                  className="flex justify-between text-sm text-gray-700"
-                >
-                  <span>{item.title}</span>
-                  <span>
-                    ${item.price.toFixed(2)} x {item.quantity}
-                  </span>
-                </div>
-              ))}
-
-              <hr />
-              <h3 className="text-lg font-bold text-center text-yellow-500">
-                Total: ${totalPrice.toFixed(2)}
-              </h3>
-
+          {indexItems.length === 0 ? (
+            <div className="text-center">
+              <p className="text-gray-500">Your cart is empty.</p>
               <button
-                onClick={handleCheckout}
-                className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded hover:cursor-pointer"
-              >
-                Proceed to Checkout
-              </button>
-
-              <button
+                className="mt-4 px-6 py-2 bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded"
                 onClick={() => navigate("/product-list")}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded hover:cursor-pointer"
               >
                 Continue Shopping
               </button>
-
-              {loginMessage && (
-                <p className="text-sm text-center text-red-500">
-                  {loginMessage}{" "}
-                  <a href="/login" className="text-blue-600 underline">
-                    Login here
-                  </a>
-                </p>
-              )}
             </div>
-          </div>
-        )}
+          ) : (
+            <div className="flex flex-col md:flex-row gap-6">
+              {/* Items List */}
+              <div className="flex-1 overflow-y-auto  md:max-h-[70vh] pr-2 space-y-4">
+                {indexItems.map((item) => (
+                  <div
+                    key={item.idx}
+                    className="flex items-center justify-between gap-4 bg-gray-100 p-4 rounded border border-gray-300 max-sm:min-h-[25vh]"
+                  >
+                    <img
+                      onClick={() => navigate(`/product-details/${item.idx}`)}
+                      src={item.thumbnail}
+                      alt={item.title}
+                      className="h-[15vh] object-cover rounded cursor-pointer"
+                    />
+                    <div className="flex-1 max-sm:max-w-20">
+                      <strong className="text-lg block  text-gray-900 text-center">
+                        {item.title}
+                      </strong>
+                      <p className="text-sm text-center text-gray-600">
+                        ${item.price.toFixed(2)}
+                      </p>
+                      <button
+                        onClick={() => deleteItem(item.idx)}
+                        className="mt-2 w-full text-sm bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
+                      >
+                        Remove
+                      </button>
+                    </div>
+                    <div className="flex flex-col items-center gap-1">
+                      <button
+                        onClick={() => increaseQuantity(item.idx)}
+                        className="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded"
+                      >
+                        +
+                      </button>
+                      <p>{item.quantity}</p>
+                      <button
+                        onClick={() => decreaseQuantity(item.idx)}
+                        className="bg-yellow-400 hover:bg-yellow-500 px-3 py-1 rounded"
+                      >
+                        -
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Cart Summary */}
+              <div className="w-full md:w-1/3 bg-gray-100 border border-gray-300 p-6 rounded space-y-4 h-fit">
+                <h3 className="text-xl font-bold text-yellow-500 text-center">
+                  Cart Summary
+                </h3>
+
+                {indexItems.map((item) => (
+                  <div
+                    key={item.idx}
+                    className="flex justify-between text-sm text-gray-700"
+                  >
+                    <span>{item.title}</span>
+                    <span>
+                      ${item.price.toFixed(2)} x {item.quantity}
+                    </span>
+                  </div>
+                ))}
+
+                <hr />
+                <h3 className="text-lg font-bold text-center text-yellow-500">
+                  Total: ${totalPrice.toFixed(2)}
+                </h3>
+
+                <button
+                  onClick={handleCheckout}
+                  className="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 rounded"
+                >
+                  Proceed to Checkout
+                </button>
+
+                <button
+                  onClick={() => navigate("/product-list")}
+                  className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 rounded"
+                >
+                  Continue Shopping
+                </button>
+
+                {loginMessage && (
+                  <p className="text-sm text-center text-red-500">
+                    {loginMessage}{" "}
+                    <a href="/login" className="text-blue-600 underline">
+                      Login here
+                    </a>
+                  </p>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );

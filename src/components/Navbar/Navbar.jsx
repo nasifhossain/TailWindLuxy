@@ -14,7 +14,7 @@ function Navbar({ loginPage }) {
   };
 
   return (
-    <header className="sticky w-full backdrop-blur-md shadow-md z-50 bg-orange-100/90 border-b border-gray-300">
+    <header className="sticky top-0 z-50  w-full backdrop-blur-md shadow-md bg-orange-100/90 border-b border-gray-300 ">
       <div className="w-full flex flex-row justify-between items-center px-3 py-2 md:px-10">
         {/* Logo */}
         <div

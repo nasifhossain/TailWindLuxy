@@ -131,7 +131,7 @@ function ProductDetails() {
       {/* Recommendations */}
       <div className="w-full justify-center mx-auto px-6 mt-10">
         <h3 className="text-xl font-bold text-center text-yellow-600 mb-4">Recommended Products</h3>
-        <div className="flex justify-center w-full gap-4 overflow-x-auto p-2">
+        <div className="grid grid-cols-4 max-sm:grid-cols-2 justify-center w-full gap-4 overflow-x-auto p-2">
           {recommendations.length > 0 ? (
             recommendations.map((product) => (
               <div
@@ -142,7 +142,7 @@ function ProductDetails() {
                 <img
                   src={product.thumbnail}
                   alt={product.title}
-                  className="w-full  object-cover rounded mb-2"
+                  className="w-full bg-slate-300   object-cover rounded mb-2"
                 />
                 <p className="text-sm font-medium">{product.title}</p>
               </div>
