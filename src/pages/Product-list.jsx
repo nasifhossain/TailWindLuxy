@@ -78,24 +78,22 @@ function ProductList() {
           </div>
         )}
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 px-6 md:px-12 pb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 gap-6 mx-6 md:mx-12 mb-12">
           {data?.products?.length > 0 ? (
             data.products.map((item) => (
               <div
                 key={item.id}
-                className="bg-white rounded-xl shadow-md px-4 pb-4 flex flex-col items-center justify-between hover:shadow-slate-500 transition-all duration-300"
+                className="bg-white rounded-xl shadow-md pb-4 flex flex-col w-full items-center justify-between hover:shadow-slate-500 transition-all duration-300 max-sm:h-[55vh]"
               >
-                <div className="bg-slate-300 h-85 flex flex-col justify-center items-center">
+                <div className="bg-slate-300 max-sm:h-[40vh] rounded-t-xl w-full  flex flex-col justify-center items-center">
                   <img
                     onClick={() => navigate(`/product-details/${item.id}`)}
                     src={item.thumbnail}
                     alt={item.title}
-                    className="h-48 sm:h-45 object-cover rounded-md mb-3 cursor-pointer hover:scale-105 transition-transform duration-300"
+                    className="sm:h-45 object-cover rounded-md mb-3 cursor-pointer hover:scale-105 transition-transform duration-300"
                   />
                 </div>
-                <hr className="w-3/4 my-1 border-t border-gray-800" />
-
-
+                <hr className="w-full my-1 border-t border-gray-300" />
 
                 <div className="text-lg max-sm:text-sm max-sm:font-bold font-medium text-center mb-1 w-full truncate">
                   {item.title}
