@@ -12,13 +12,12 @@ function MyAccount() {
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [redirectMessage, setRedirectMessage] = useState("");
-  const[loading,SetLoading] = useState(false);
 
   const onSubmit = (data) => {
     setError("");
     setMessage("");
     setRedirectMessage("");
-    SetLoading(true);
+
     axios
       .put(
         `https://luxury-x.vercel.app/user/${username}`,
@@ -43,8 +42,6 @@ function MyAccount() {
       })
       .catch((err) => {
         setError(err.response?.data?.error || "Something went wrong");
-      }).finally(()=>{
-        SetLoading(false);
       });
   };
 
@@ -70,35 +67,6 @@ function MyAccount() {
   }, [username, navigate, setValue]);
 
   if (username !== localStorage.getItem("username")) return null;
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-white">
-        <div className="flex flex-col items-center space-y-3">
-          <svg
-            className="animate-spin h-10 w-10 text-emerald-600"
-            viewBox="0 0 24 24"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-              fill="none"
-            ></circle>
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8v8z"
-            ></path>
-          </svg>
-          <p className="text-gray-600 font-medium">Loading Account Details...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-[#fdfcf9] lg:min-h-screen">
