@@ -1,6 +1,8 @@
 import { Link } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 
+/* The above code is a React component named `Home` that represents the homepage of a luxury lifestyle
+website. Here is a breakdown of what the code is doing: */
 function Home() {
   return (
     <div className="bg-white text-gray-900 font-poppins">

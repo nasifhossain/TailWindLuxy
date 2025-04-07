@@ -11,6 +11,8 @@ function Cart() {
   const [loginMessage, setLoginMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
+ /* The `useEffect` hook in the provided code snippet is responsible for fetching the cart items data
+ when the component mounts. Here's a breakdown of what it does: */
   useEffect(() => {
     const username = localStorage.getItem("username");
     if (username) {
@@ -28,10 +30,10 @@ function Cart() {
           setLoading(false);
         });
     } else {
-      const carty = localStorage.getItem("cart");
-      if (carty) {
-        const cartDetials = JSON.parse(carty);
-        setIndexItems(cartDetials);
+      const cart = localStorage.getItem("cart");
+      if (cart) {
+        const cartDetails = JSON.parse(cart);
+        setIndexItems(cartDetails);
       }
     }
   }, []);

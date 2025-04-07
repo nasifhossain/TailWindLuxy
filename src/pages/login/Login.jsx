@@ -1,11 +1,13 @@
-import { useForm } from "react-hook-form";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import Navbar from "../../components/Navbar/Navbar";
+// Import necessary dependencies
+import { useForm } from "react-hook-form"; // Form handling library
+import axios from "axios"; // HTTP client for API requests
+import { useNavigate } from "react-router-dom"; // Navigation hook
+import { useState } from "react"; // State management
+import { Link } from "react-router-dom"; // Link component for navigation
+import Navbar from "../../components/Navbar/Navbar"; // Navigation bar component
 
 function LoginPage() {
+  // State management for error handling and loading state
   const [errorResponse, setErrorResponse] = useState("");
   const navigate = useNavigate();
   const {
@@ -16,25 +18,29 @@ function LoginPage() {
   } = useForm();
   const [loading, setLoading] = useState(false);
 
+  // Form submission handler
   const onSubmit = async (data) => {
     setLoading(true);
     setErrorResponse("");
 
     try {
+      // API call to login endpoint
       const res = await axios.post("https://luxury-x.vercel.app/user/login", {
         username: data.username,
         password: data.password,
       });
 
+      // Store authentication data in localStorage
       const { token, username } = res.data;
-
       localStorage.setItem("token", token);
       localStorage.setItem("username", username);
 
+      // Handle cart synchronization if items exist in localStorage
       const cart = localStorage.getItem("cart")
         ? JSON.parse(localStorage.getItem("cart"))
         : [];
 
+      // Sync cart items with backend if cart is not empty
       if (cart.length > 0) {
         await Promise.all(
           cart.map((item) =>
@@ -71,12 +77,13 @@ function LoginPage() {
     }
   };
 
+  // Render login page with two sections: banner and form
   return (
     <div className="bg-[#fdfcf9] min-h-screen">
       <Navbar loginPage={true} />
       <div className="flex flex-col lg:flex-row min-h-screen">
         
-        {/* Left Section - Banner */}
+        {/* Left Section - Welcome Banner */}
         <div className="hidden lg:flex lg:w-1/2 bg-gradient-to-br from-emerald-600 to-emerald-400 text-white flex-col justify-center px-12 py-10">
           <div className="max-w-lg">
             <h1 className="font-bold text-5xl leading-tight mb-4">
@@ -101,7 +108,9 @@ function LoginPage() {
               Unlock premium collections & exclusive offers
             </p>
 
+            {/* Login Form */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+              {/* Username Input Field */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Username
@@ -121,6 +130,7 @@ function LoginPage() {
                 )}
               </div>
 
+              {/* Password Input Field */}
               <div>
                 <label className="block text-sm font-medium text-gray-700">
                   Password
@@ -144,6 +154,7 @@ function LoginPage() {
                 )}
               </div>
 
+              {/* Submit Button */}
               <button
                 type="submit"
                 className="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-2 px-4 rounded-lg transition duration-200"
@@ -151,6 +162,7 @@ function LoginPage() {
                 {loading ? "Logging in..." : "Login"}
               </button>
 
+              {/* Error Message Display */}
               {errorResponse && (
                 <p className="text-sm text-red-600 mt-2">
                   {errorResponse}
@@ -165,8 +177,9 @@ function LoginPage() {
                 </p>
               )}
 
+              {/* Registration Link */}
               <p className="text-sm text-gray-700 mt-4 text-center">
-                Don’t have an account?{" "}
+                Don't have an account?{" "}
                 <Link
                   to="/register"
                   className="text-emerald-600 hover:underline"
@@ -176,7 +189,7 @@ function LoginPage() {
               </p>
             </form>
 
-            {/* Trusted Brands */}
+            {/* Trusted Brands Section */}
             <div className="mt-8">
               <h3 className="text-xs text-gray-500 uppercase mb-3 text-center tracking-widest">
                 Trusted By
